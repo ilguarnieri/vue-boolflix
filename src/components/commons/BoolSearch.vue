@@ -1,7 +1,7 @@
 <template>
 
     <section class="search-wrapper">
-        <input type="text" id="searchMovie" v-model="store.inputSearch" @keyup="getMovie()">
+        <input type="text" id="searchMovie" v-model="store.inputSearch" @keyup="setSearch()">
     </section>
     
 </template>
@@ -9,38 +9,23 @@
 
 <script>
 import store from '../../store.js'
-import axios from 'axios'
+import {getMovies, getSeries} from '../../store.js'
 
 export default {
     name: 'BoolSearch',
+
+
     data() {
         return{
-            store,
-            page: 1,
-            totalPages: undefined
+            store
         }
     },
+
+
     methods:{
-        getMovie: function(){
-            const value = store.inputSearch.trim()
-            if(value != ''){
-                axios.get(`${store.url}/search/movie`,{
-                    params:{
-                        api_key: store.apiKey,
-                        language: store.lg,
-                        query: store.inputSearch,
-                        include_adult: true
-                    }
-                })
-                .then(res =>{
-                    store.searchArray = res.data.results
-                })
-                .catch(err => {
-                    console.warn(err.response)
-                })
-            }else{
-                store.searchArray = []
-            }
+        setSearch: function(){
+            getMovies(),
+            getSeries()
         }
     }
 }

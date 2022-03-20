@@ -27,7 +27,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: $bgAll;
-  height: 100vh;
+  min-height: 100vh;
   color: $clText;
 }
 </style>
