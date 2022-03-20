@@ -15,7 +15,9 @@ export default {
     name: 'BoolSearch',
     data() {
         return{
-            store
+            store,
+            page: 1,
+            totalPages: undefined
         }
     },
     methods:{
@@ -25,8 +27,9 @@ export default {
                 axios.get(`${store.url}/search/movie`,{
                     params:{
                         api_key: store.apiKey,
-                        language: `it-IT`,
-                        query: store.inputSearch
+                        language: store.lg,
+                        query: store.inputSearch,
+                        include_adult: true
                     }
                 })
                 .then(res =>{

@@ -1,9 +1,14 @@
 <template>
 
     <section>
-        <div v-for="movie in store.searchArray" :key="movie.id">
-            {{movie.original_title}}
-        </div>       
+        <ul class="movie__wrapper">
+            <li v-for="movie in store.searchArray" :key="movie.id" class="movie__card">
+                <p>{{movie.title}}</p>
+                <p>{{movie.original_title}}</p>
+                <p>{{movie.original_language}}</p>
+                <p>{{movie.vote_average}}</p>
+            </li>
+        </ul>    
     </section>
     
 </template>
@@ -23,6 +28,14 @@ export default{
 
 
 <style lang="scss" scoped>
+.movie__wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
 
-
+    .movie__card{
+        padding: 10px;
+        border: 1px solid red;
+    }
+}
 </style>
