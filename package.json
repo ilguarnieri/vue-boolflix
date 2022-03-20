@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@fontsource/noto-sans": "^4.5.5",
+    "axios": "^0.26.1",
     "core-js": "^3.8.3",
     "execa": "latest",
     "vue": "^2.6.14"

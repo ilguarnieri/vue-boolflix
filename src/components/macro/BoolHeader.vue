@@ -19,7 +19,7 @@ import BoolSearch from '../commons/BoolSearch.vue'
 export default{
     name: 'BoolHeader',
     components: {
-        BoolSearch,
+        BoolSearch
     }
 }
 </script>
