@@ -1,29 +1,23 @@
 <template>
 
     <section>
-        <div>
-            <h2>Film</h2>
-            <CardItem v-for="movie in store.moviesFilm" :key="movie.id" :element="movie" />
-        </div>
-
-        <div>
-            <h2>Series</h2>
-             <CardItem v-for="serie in store.seriesTv" :key="serie.id" :element="serie" />
-        </div>
-
+        <CardWrapper title="Film" :selectStore="store.moviesFilm" />
+        <CardWrapper title="Serie" :selectStore="store.seriesTv" />
     </section>
     
 </template>
 
 <script>
 import store from '../../store.js'
-import CardItem from '../commons/CardItem.vue'
+import CardWrapper from '../commons/CardWrapper.vue'
 
 export default{
     name: 'BoolMain',
+    
     components: {
-        CardItem
+        CardWrapper
     },
+
     data(){
         return{
             store,

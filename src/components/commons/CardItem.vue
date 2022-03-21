@@ -16,7 +16,7 @@
         </figure>
         <!-- star voto -->
         <div class="star__vote">
-            <i v-for="n in 5" :key="n" class="fa-star" :class="n <= vote ? 'fa' : 'far'"></i>
+            <i v-for="n in 5" :key="n" class="fa-star" :class="n <= vote ? 'fa gold' : 'far gray'"></i>
         </div>        
 
     </div>
@@ -98,8 +98,12 @@ export default{
         max-width: 30px;
     }
 
-    .star__vote{
-        color: #FED502;
+    .gold{
+        color: gold;
+    }
+
+    .gray{
+        color: gray;
     }
 }
 
