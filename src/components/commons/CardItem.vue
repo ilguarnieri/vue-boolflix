@@ -14,8 +14,10 @@
         <figure class="movie__flag">
             <img :src="flags[element.original_language]">
         </figure>
-        <!-- voto -->
-        <p>{{vote}}</p>        
+        <!-- star voto -->
+        <div class="star__vote">
+            <i v-for="n in 5" :key="n" class="fa-star" :class="n <= vote ? 'fa' : 'far'"></i>
+        </div>        
 
     </div>
   
@@ -94,6 +96,10 @@ export default{
 
     .movie__flag{
         max-width: 30px;
+    }
+
+    .star__vote{
+        color: #FED502;
     }
 }
 
