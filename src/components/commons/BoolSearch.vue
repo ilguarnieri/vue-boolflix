@@ -1,5 +1,6 @@
 <template>
 
+    <!-- input search -->
     <section class="search-wrapper">
         <input type="text" id="searchMovie" v-model="store.inputSearch" @keyup="setSearch">
     </section>

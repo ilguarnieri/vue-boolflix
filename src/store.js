@@ -10,12 +10,14 @@ const store = Vue.observable({
     lg: 'it-IT',
     //contenuti adulti
     adult: false,
+
+    //post URI
     movie: '/search/movie',
     tv:'/search/tv',
 
     inputSearch: '',
     moviesFilm: [],
-    seriesTv: [],
+    seriesTv: []    
 })
 
 export default store
