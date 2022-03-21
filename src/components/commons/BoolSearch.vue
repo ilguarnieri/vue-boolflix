@@ -1,7 +1,7 @@
 <template>
 
     <section class="search-wrapper">
-        <input type="text" id="searchMovie" v-model="store.inputSearch" @keyup="setSearch()">
+        <input type="text" id="searchMovie" v-model="store.inputSearch" @keyup="setSearch">
     </section>
     
 </template>
@@ -9,11 +9,10 @@
 
 <script>
 import store from '../../store.js'
-import {getMovies, getSeries} from '../../store.js'
+import {getMovies} from '../../store.js'
 
 export default {
     name: 'BoolSearch',
-
 
     data() {
         return{
@@ -21,11 +20,10 @@ export default {
         }
     },
 
-
     methods:{
         setSearch: function(){
-            getMovies(),
-            getSeries()
+            getMovies(store.movie),
+            getMovies(store.tv)
         }
     }
 }

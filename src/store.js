@@ -4,12 +4,14 @@ import axios from 'axios'
 
 const store = Vue.observable({
     //setting API
-    baseUrl:'https://api.themoviedb.org/3',
+    baseURI:'https://api.themoviedb.org/3',
     apiKey:'22a5e9294f2ce2781f4a9ec0b6aed5d1',
     //language
     lg: 'it-IT',
     //contenuti adulti
     adult: false,
+    movie: '/search/movie',
+    tv:'/search/tv',
 
     inputSearch: '',
     moviesFilm: [],
@@ -18,11 +20,11 @@ const store = Vue.observable({
 
 export default store
 
-
-export function getMovies(){
+//ricerca film e serie
+export function getMovies(genre){
     const value = store.inputSearch.trim()
     if(value != ''){
-        axios.get(`${store.baseUrl}/search/movie`,{
+        axios.get(`${store.baseURI}` + genre,{
             params:{
                 api_key: store.apiKey,
                 language: store.lg,
@@ -31,35 +33,17 @@ export function getMovies(){
             }
         })
         .then(res =>{
-            store.moviesFilm = res.data.results
-        })
-        .catch(err => {
-            console.warn(err.response)
-        })
-    }else{
-        store.moviesFilm = []
-    }
-}
-
-
-export function getSeries(){
-    const value = store.inputSearch.trim()
-    if(value != ''){
-        axios.get(`${store.baseUrl}/search/tv`,{
-            params:{
-                api_key: store.apiKey,
-                language: store.lg,
-                query: store.inputSearch,
-                include_adult: store.adult
+            if(genre === store.movie){
+                store.moviesFilm = res.data.results
+            }else{
+                store.seriesTv = res.data.results
             }
         })
-        .then(res =>{
-            store.seriesTv = res.data.results
-        })
         .catch(err => {
             console.warn(err.response)
         })
     }else{
+        store.moviesFilm = [],
         store.seriesTv = []
     }
 }
