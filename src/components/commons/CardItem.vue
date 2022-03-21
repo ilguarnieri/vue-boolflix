@@ -4,9 +4,8 @@
 
         <!-- copertina -->
         <figure>
-            <img :src="getPoster(element.poster_path)">
+            <img :src="getPoster">
         </figure>
-
         <!-- titolo -->
         <h3>{{title}}</h3>
         <!-- titolo originale -->
@@ -16,7 +15,7 @@
             <img :src="flags[element.original_language]">
         </figure>
         <!-- voto -->
-        <p>{{element.vote_average}}</p>        
+        <p>{{vote}}</p>        
 
     </div>
   
@@ -39,6 +38,8 @@ export default{
     data(){
         return{
             store,
+            imgBaseURI: 'https://image.tmdb.org/t/p/',
+            imgWidth: 'w342',
             flags:{
                 de: require('../../assets/img/flags/de.png'),
                 en: require('../../assets/img/flags/en.png'),
@@ -50,17 +51,8 @@ export default{
         }
     },
 
-    methods:{
-        //recupero copertina
-        getPoster: function(value){
-            if(value !== null){
-                return `https://image.tmdb.org/t/p/w342/${value}`
-            }
-            return require('../../assets/img/notFind.jpg')
-        }
-    },
-
     computed:{
+        //controllo titolo film serie
         title: function(){
             if(this.element.name !== undefined){
                 return this.element.name
@@ -74,10 +66,22 @@ export default{
             }
 
             return this.element.original_title
-        }
-    }
+        },
 
-   
+         //recupero copertina
+        getPoster: function(){
+            const img = this.element.poster_path;
+            if(img !== null){
+                return this.imgBaseURI + this.imgWidth + img
+            }
+            return require('../../assets/img/notFind.jpg')
+        },
+
+        //trasformazione del voto
+        vote: function(){
+            return Math.ceil(this.element.vote_average / 2)
+        }
+    }   
 }
 </script>
 
