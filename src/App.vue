@@ -1,7 +1,9 @@
 <template>
   <div id="app">
-    <BoolHeader />
-    <BoolMain />
+    <main>
+      <BoolHeader />
+      <BoolMain />
+    </main>
   </div>
 </template>
 
@@ -26,8 +28,15 @@ export default {
   font-family: "Noto Sans", sans-serif; 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: $bgAll;
   min-height: 100vh;
+  overflow: auto;
   color: $clText;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  background-color: $bgAll;
+  flex-grow: 1;
 }
 </style>

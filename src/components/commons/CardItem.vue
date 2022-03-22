@@ -1,31 +1,39 @@
 <template>
 
-    <div class="movie__card">
+    <div class="card__item"
+    :style="{backgroundImage: `url(${getPoster})`}">
 
-        <!-- copertina -->
-        <figure>
-            <img :src="getPoster">
-        </figure>
-        <!-- titolo -->
-        <h3>{{title}}</h3>
-        <!-- titolo originale -->
-        <p>{{originalTitle}}</p>
-        <!-- bandiera -->
-        <figure class="movie__flag">
-            <img :src="flags[element.original_language]">
-        </figure>
-        <!-- star voto -->
-        <div class="star__vote">
-            <i v-for="n in 5" :key="n" class="fa-star" :class="n <= vote ? 'fa gold' : 'far gray'"></i>
-        </div>        
+        <div class="card__overlay">
+            <!-- titolo -->
+            <h3>{{title}}</h3>
+
+            <!-- titolo originale -->
+            <p>{{originalTitle}}</p>
+
+            <!-- bandiera -->
+            <figure class="movie__flag">
+                <img :src="flags[element.original_language]">
+            </figure> 
+
+            <!-- star voto -->
+            <div v-show="element.vote_average > 0" class="star__vote">
+                <span class="section__title">Voto: </span>
+                <i v-for="n in 5" :key="n" class="fa-star" :class="n <= vote ? 'fa gold' : 'far gray'"></i>
+            </div>
+
+            <!-- overview -->
+            <div v-show="element.overview !== ''" class="section__overview">
+                <span class="section__title">Overview: </span>
+                <p class="overview__description">{{element.overview}}</p>
+
+            </div>
+        </div>
 
     </div>
-  
-
 </template>
 
 <script>
-import store from '../../store.js'
+import data from '../../store/data.js'
 
 export default{
     name: 'CardItem',
@@ -39,7 +47,7 @@ export default{
 
     data(){
         return{
-            store,
+            data,
             imgBaseURI: 'https://image.tmdb.org/t/p/',
             imgWidth: 'w342',
             flags:{
@@ -89,21 +97,71 @@ export default{
 
 
 <style lang="scss" scoped>
+@import '../../assets/scss/_variables.scss';
 
-.movie__card{
-    padding: 10px;
-    border: 1px solid red;
+.card__item{
+    width: 250px;
+    aspect-ratio: 2/3;
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px;
+    cursor: pointer;
+    user-select: none;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
 
-    .movie__flag{
-        max-width: 30px;
+    .card__overlay{
+        opacity: 0;;
+        flex-grow: 1;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 10px;
+        background-color: rgba(0,0,0,0.7);
+
+        .section__title{
+            font-weight: bold;
+        }
+
+        .overview__description{
+            color: $textGray;
+        }
+
+        .movie__flag{
+            max-width: 30px;
+        }
+
+        .gold{
+            color: gold;
+        }
+
+        .gray{
+            color: gray;
+        }
     }
 
-    .gold{
-        color: gold;
+    &:hover .card__overlay{
+        animation: showOverlay 400ms linear;
+        opacity: 1;
+        position: relative;
     }
+}
 
-    .gray{
-        color: gray;
+/* SCROLL-BAR STYLE */
+::-webkit-scrollbar {
+    width: 0px;
+}
+
+@keyframes showOverlay{
+    0%{
+        opacity: 0;
+        top: 100%;
+    }
+    100%{
+        opacity: 1;
+        top: 0;
     }
 }
 
